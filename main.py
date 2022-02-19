@@ -1,7 +1,9 @@
-#install Pyaudio: https://www.youtube.com/watch?v=mlrxIQRK3SE
-import speech_recognition       #pip install SpeechRecognition
-import pyttsx3                  #pip install pyttsx3
-
+# install Pyaudio: https://www.youtube.com/watch?v=mlrxIQRK3SE
+import speech_recognition  # pip install SpeechRecognition
+import pyttsx3  # pip install pyttsx3
+import pywhatkit  # pip install
+import random
+import os
 
 listener = speech_recognition.Recognizer()
 engine = pyttsx3.init('sapi5')
@@ -36,6 +38,22 @@ def talk(text):
     engine.runAndWait()
 
 
+def play_youtube(command):
+    if 'music' in command:
+        talk('Playing some music')
+        music_dir = "C:/Users/Hp/Music"
+        songs = os.listdir(music_dir)
+        rd = random.choice(songs)
+        os.startfile(os.path.join(music_dir, rd))
+        print('Playing on music')
+    else:
+        talk('searching..')
+        song = command.replace('play', '')
+        talk('Playing' + song)
+        pywhatkit.playonyt(song)
+        print('playing on youtube')
+
+
 def run_alexa():
     while True:
         command = get_audio()
@@ -43,9 +61,13 @@ def run_alexa():
 
         if 'hello' in command:
             talk("Hello Sir, How may I help you")
+        elif 'play' in command:
+            play_youtube(command)
         elif 'sleep' or 'bye bye' in command:
             talk("Ok Sir")
             break
+        elif 'how are you' in command:
+            talk("Magnificent")
         else:
             talk("Can you say that again")
 
