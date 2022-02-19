@@ -4,6 +4,8 @@ import pyttsx3  # pip install pyttsx3
 import pywhatkit  # pip install
 import random
 import os
+import wikipedia
+
 
 listener = speech_recognition.Recognizer()
 engine = pyttsx3.init('sapi5')
@@ -54,6 +56,19 @@ def play_youtube(command):
         print('playing on youtube')
 
 
+def wiki_search(command):
+    try:
+        talk('Searching...')
+        person = command.replace('who is', '')
+        info = wikipedia.summary(person, 1)
+        print(info)
+        print('searching on wikipedia')
+        talk(info)
+    except Exception as ep:
+        print(ep)
+        talk('Unable to find result')
+
+
 def run_alexa():
     while True:
         command = get_audio()
@@ -61,11 +76,21 @@ def run_alexa():
 
         if 'hello' in command:
             talk("Hello Sir, How may I help you")
+
         elif 'play' in command:
             play_youtube(command)
+
+        elif 'who' in command:
+            if 'made' in command or 'created' in command:  # Who created you
+                talk('I was created by Amaan')
+                print('who made you')
+            else:
+                wiki_search(command)
+
         elif 'sleep' or 'bye bye' in command:
             talk("Ok Sir")
             break
+
         elif 'how are you' in command:
             talk("Magnificent")
         else:
