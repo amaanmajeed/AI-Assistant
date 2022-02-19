@@ -5,6 +5,7 @@ import pywhatkit  # pip install
 import random
 import os
 import wikipedia
+import datetime
 
 
 listener = speech_recognition.Recognizer()
@@ -69,6 +70,18 @@ def wiki_search(command):
         talk('Unable to find result')
 
 
+def time():
+    this_time = datetime.datetime.now().strftime('%I:%M %p')
+    print('The time is ' + this_time)
+    talk('The time is ' + this_time)
+
+
+def date():
+    x = datetime.datetime.now()
+    talk('Today is ' + x.strftime("%A %d %B %Y"))
+    print('Today is ' + x.strftime("%A %d %B %Y"))
+
+
 def run_alexa():
     while True:
         command = get_audio()
@@ -86,6 +99,24 @@ def run_alexa():
                 print('who made you')
             else:
                 wiki_search(command)
+
+        elif 'time' in command:  # what is the time right now
+            time()
+
+        elif 'what' in command:  # what is te date today
+            if 'date' in command:
+                date()
+            elif 'do' in command:
+                print('I can tell the time, the date, search the web, play a youtube video, tell you who made me.')
+                talk('I can tell the time, the date, search the web, play a youtube video, tell you who made me.')
+                print('I can open any app on your system, tell you a joke, toggle between apps, close the apps or ')
+                print('close the current tab')
+                talk('I can open any app on your system, tell you a joke, toggle between apps, close the apps or '
+                     'close the current tab')
+                print("you say it, I'll do it.")
+                talk("you say it, I'll do it.")
+                print('And when you are done, just send me to sleep')
+                talk('And when you are done, just send me to sleep')
 
         elif 'sleep' or 'bye bye' in command:
             talk("Ok Sir")
