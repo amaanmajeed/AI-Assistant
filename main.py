@@ -6,6 +6,8 @@ import random
 import os
 import wikipedia
 import datetime
+import pyautogui
+from time import sleep
 
 
 listener = speech_recognition.Recognizer()
@@ -82,6 +84,21 @@ def date():
     print('Today is ' + x.strftime("%A %d %B %Y"))
 
 
+def open_app(command):
+    print('Opening apps')
+    if 'open' in command:
+        app = command.replace('open', '')
+        if 'task manager' in app:
+            pyautogui.hotkey('ctrl', 'shift', 'esc')
+            talk('Opening task manager')
+        else:
+            talk(f'Opening {app}')
+            pyautogui.hotkey('win')
+            sleep(0.5)
+            pyautogui.write(app, interval=0.02)
+            pyautogui.hotkey('enter')
+
+
 def run_alexa():
     while True:
         command = get_audio()
@@ -117,6 +134,9 @@ def run_alexa():
                 talk("you say it, I'll do it.")
                 print('And when you are done, just send me to sleep')
                 talk('And when you are done, just send me to sleep')
+
+        elif 'open' in command:  # Open and app
+            open_app(command)
 
         elif 'sleep' or 'bye bye' in command:
             talk("Ok Sir")
