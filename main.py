@@ -42,6 +42,17 @@ def talk(text):
     engine.say(text)
     engine.runAndWait()
 
+def greet():
+    try:
+        print('I am splendid, Thank you for asking!')
+        talk('I am splendid, Thank you for asking!')
+
+        print('What can I do for you?')
+        talk('What can I do for you?')
+        run_alexa()
+    except Exception as ep:
+        print(ep)
+
 
 def play_youtube(command):
     if 'music' in command:
@@ -138,12 +149,17 @@ def run_alexa():
         elif 'open' in command:  # Open and app
             open_app(command)
 
-        elif 'sleep' or 'bye bye' in command:
+        elif 'how are you' in command:                      # Greetings
+            greet()
+
+        elif 'sleep' in command:
             talk("Ok Sir")
             break
 
-        elif 'how are you' in command:
-            talk("Magnificent")
+        elif 'bye bye' in command:
+            talk("Byie")
+            break
+
         else:
             talk("Can you say that again")
 
