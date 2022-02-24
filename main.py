@@ -166,6 +166,10 @@ def run_alexa():
         elif 'open' in command:  # Open and app
             open_app(command)
 
+        elif 'toggle' in command:  # Toggle Apps
+            talk('Right on it')
+            pyautogui.hotkey('alt', 'tab')
+
         elif 'how are you' in command:                      # Greetings
             greet()
 
