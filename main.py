@@ -5,6 +5,7 @@ import pywhatkit  # pip install
 import random
 import os
 import wikipedia
+import pyjokes
 import datetime
 import pyautogui
 from time import sleep
@@ -184,6 +185,11 @@ def run_alexa():
             elif 'tab' in command:
                 pyautogui.hotkey('ctrl', 'w')  # Close this tab
                 print('closing this tab')
+
+        elif 'joke' in command:  # Tell me a joke
+            joke = pyjokes.get_joke()
+            print(joke)
+            talk(joke)
 
         else:
             talk("Can you say that again")
