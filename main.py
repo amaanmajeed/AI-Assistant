@@ -176,6 +176,15 @@ def run_alexa():
             talk("Byie")
             break
 
+        elif 'close' in command:  # Close
+            talk('Sure!')
+            if 'app' in command:
+                pyautogui.hotkey('alt', 'f4')  # Close this app
+                print('closing this app')
+            elif 'tab' in command:
+                pyautogui.hotkey('ctrl', 'w')  # Close this tab
+                print('closing this tab')
+
         else:
             talk("Can you say that again")
 
