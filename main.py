@@ -42,6 +42,22 @@ def talk(text):
     engine.say(text)
     engine.runAndWait()
 
+
+def wish_me():
+    print('Welcome back sir!')
+    talk('Welcome back sir!')
+    hour = datetime.datetime.now().hour
+    if 0 <= hour <= 12:
+        print('Good Morning!')
+        talk('Good Morning!')
+    elif 12 <= hour <= 24:
+        print('Good Evening!')
+        talk('Good Evening!')
+
+    print('How may I help you?')
+    talk('How may I help you!')
+
+
 def greet():
     try:
         print('I am splendid, Thank you for asking!')
@@ -164,6 +180,7 @@ def run_alexa():
             talk("Can you say that again")
 
 
+wish_me()
 print('Listening...')
 try:
     run_alexa()
