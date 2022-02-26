@@ -59,18 +59,6 @@ def wish_me():
     talk('How may I help you!')
 
 
-def greet():
-    try:
-        print('I am splendid, Thank you for asking!')
-        talk('I am splendid, Thank you for asking!')
-
-        print('What can I do for you?')
-        talk('What can I do for you?')
-        run_alexa()
-    except Exception as ep:
-        print(ep)
-
-
 def play_youtube(command):
     if 'music' in command:
         talk('Playing some music')
@@ -87,6 +75,12 @@ def play_youtube(command):
         print('playing on youtube')
 
 
+def time():
+    this_time = datetime.datetime.now().strftime('%I:%M %p')
+    print('The time is ' + this_time)
+    talk('The time is ' + this_time)
+
+
 def wiki_search(command):
     try:
         talk('Searching...')
@@ -100,16 +94,22 @@ def wiki_search(command):
         talk('Unable to find result')
 
 
-def time():
-    this_time = datetime.datetime.now().strftime('%I:%M %p')
-    print('The time is ' + this_time)
-    talk('The time is ' + this_time)
-
-
 def date():
     x = datetime.datetime.now()
     talk('Today is ' + x.strftime("%A %d %B %Y"))
     print('Today is ' + x.strftime("%A %d %B %Y"))
+
+
+def greet():
+    try:
+        print('I am splendid, Thank you for asking!')
+        talk('I am splendid, Thank you for asking!')
+
+        print('What can I do for you?')
+        talk('What can I do for you?')
+        run_alexa()
+    except Exception as ep:
+        print(ep)
 
 
 def open_app(command):
